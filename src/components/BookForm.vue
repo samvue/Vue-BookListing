@@ -1,14 +1,15 @@
 <template>
   <div>
-    <form class="" action="#" method="post" @submit="bookSubmit">
-      <input type="text" name="title" value="" placeholder="Book Title" />
-      <input type="text" name="author" value="" placeholder="Book Author" />
+    <form class="" action="#" method="post" @submit.prevent="bookSubmit(bookTitle, bookAuthor)">
+      <input v-model="bookTitle" type="text" name="title" value="" placeholder="Book Title" />
+      <input v-model="bookAuthor" type="text" name="author" value="" placeholder="Book Author" />
       <button type="submit" name="button">Add Book</button>
     </form>
   </div>
 </template>
 
 <script>
+
 export default {
   name: "BookForm",
   props: ["books"],
@@ -18,6 +19,11 @@ export default {
       bookAuthor: "",
     };
   },
+  methods: {
+    bookSubmit(bookTitle, bookAuthor) {
+      this.$emit('addBook', bookTitle, bookAuthor);
+    }
+  }
 };
 </script>
 
